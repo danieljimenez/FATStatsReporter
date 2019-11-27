@@ -273,6 +273,12 @@ func parseSessionStats(s string) (*Statistics, error) {
 		return nil, errors.New(fmt.Sprintf("can not parse '%s' as float for '%s' column.", m[columnName], columnName))
 	}
 
+	columnName = "Score"
+	score, err := strconv.ParseFloat(m[columnName], 0)
+	if err != nil {
+		return nil, errors.New(fmt.Sprintf("can not parse '%s' as float for '%s' column.", m[columnName], columnName))
+	}
+
 	statistics := &Statistics{
 		Kills:            kills,
 		Deaths:           deaths,
@@ -286,6 +292,7 @@ func parseSessionStats(s string) (*Statistics, error) {
 		Directed:         directed,
 		DistanceTraveled: distanceTraveled,
 		Scenario:         m["Scenario"],
+		Score:			  score,
 		Hash:             m["Hash"],
 		GameVersion:      m["Game Version"],
 	}

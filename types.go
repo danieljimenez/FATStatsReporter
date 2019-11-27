@@ -54,6 +54,7 @@ type Statistics struct {
 	Directed         float64 `json:"directed"`
 	DistanceTraveled float64 `json:"distance_traveled"`
 	Scenario         string  `json:"scenario"`
+	Score            float64 `json:"score"`
 	Hash             string  `json:"hash"`
 	GameVersion      string  `json:"game_version"`
 }

@@ -1,4 +1,4 @@
-module awesomeProject
+module fatStatsUploader
 
 go 1.13
 
