@@ -3,6 +3,7 @@ package main
 import "time"
 
 type Session struct {
+	SessionHash     string           `json:"session_hash"`
 	Time            time.Time        `json:"time"`
 	GeneralSettings *GeneralSettings `json:"general_settings"`
 	WeaponSettings  *WeaponSettings  `json:"weapon_settings"`

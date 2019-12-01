@@ -2,6 +2,7 @@ package main
 
 import (
 	"bufio"
+	"crypto/sha1"
 	"encoding/csv"
 	"errors"
 	"fmt"
@@ -30,6 +31,11 @@ func parseSession(file *os.File) (*Session, error) {
 		return nil, errors.New("invalid file, does not contain 4 sections")
 	}
 
+	hash := sha1.New()
+	hash.Write([]byte(file.Name()))
+	byteSum := hash.Sum(nil)
+	sha1Hash := fmt.Sprintf("%x", byteSum)
+
 	timeStamp, err := parseTimeStamp(file.Name())
 	if err != nil {
 		return nil, err
@@ -56,6 +62,7 @@ func parseSession(file *os.File) (*Session, error) {
 	}
 
 	session := &Session{
+		SessionHash:     sha1Hash,
 		Time:            timeStamp,
 		GeneralSettings: generalSettings,
 		WeaponSettings:  weaponSettings,
@@ -292,7 +299,7 @@ func parseSessionStats(s string) (*Statistics, error) {
 		Directed:         directed,
 		DistanceTraveled: distanceTraveled,
 		Scenario:         m["Scenario"],
-		Score:			  score,
+		Score:            score,
 		Hash:             m["Hash"],
 		GameVersion:      m["Game Version"],
 	}
